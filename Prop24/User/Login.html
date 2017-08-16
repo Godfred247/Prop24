@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+	<meta charset="utf-8" />
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-3.1.1.min.js"></script>
+    <script src="../Scripts/jquery-3.1.1.js"></script>
+    <!--<script src="../Angularhome.js"></script>-->
+    <script src="../Scripts/angular.min.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <script src="../Angularhome.js"></script>
+
+</head>
+<body ng-app="homeapp" ng-controller="LoginController">
+    <div class="container" style="align-self:center" >
+        <h2>Login</h2>
+        <hr />
+        <div class="form-group">
+            <label class="label1" for="email">Email address</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" id="price" placeholder="Email" ng-model="email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="label1" for="email">Password</label>
+            <div class="col-sm-3">
+                <input type="password" class="form-control" id="price" placeholder="Password" ng-model="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-5">
+                <input ng-click="login()" type="button" value="{{btntext}}" class="btn btn-block btn-success" />
+            </div>
+        </div>
+        <br ng-model="logged"/>
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="controller.js"></script>
+</head>
+<body ng-app="signUpApp" ng-controller="imageController">
+    <!--<div>
+        <div class="row container-fluid">
+            <div class="col-lg-4">
+                <input type="file" ng-model="image" accept="image/*" multiple class="btn btn-info" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <img id="output" style="width:200px; height:150px" class="img-responsive" />
+            </div>         
+        </div>
+    </div>-->
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Size</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in imagesrc track by $index">
+                <td>{{x.name}}</td>
+                <td>
+                    <img ng-src="{{x.Src}}" title="{{x.title}}" style="width:100px" />
+                </td>
+                <td>{{x.size}}.com</td>
+            </tr>         
+        </tbody>
+    </table>
+
+</body>
+</html>

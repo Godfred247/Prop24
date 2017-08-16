@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="property.js"></script>
+    <script src="Scripts/jquery-3.1.1.js"></script>
+    <script src="Scripts/jquery-3.1.1.min.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body ng-app="myProp">
+    <div ng-controller="getPropertyCtrl">
+        <table class="table table-hover" style="width:auto">
+            <thead>
+                <tr>
+                    <th>Price</th>
+                    <th>floor Size</th>
+                    <th>Address</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Suburb</th>
+                    <th>Type</th>
+                    <th>No. Of Beds</th>
+                    <th>No. Of Baths</th>
+                    <th>No. Of Garages</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="property in properties">
+                    <td>{{property.price}}</td>
+                    <td>{{property.m2}}</td>
+                    <td>{{property.address}}</td>
+                    <td>{{property.title}}</td>
+                    <td>{{property.description}}</td>
+                    <td>{{property.suburb}}</td>
+                    <td>{{property.typee}}</td>
+                    <td>{{property.noOfBeds}}</td>
+                    <td>{{property.noOfBaths}}</td>
+                    <td>{{property.noOfGarages}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <button ng-click="GetProperty()" type="button" value="Get Property" />
+    </div>
+</body>
+</html>
