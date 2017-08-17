@@ -37,8 +37,9 @@
         <span class="clearfix"></span>
         <hr />
         <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#myModalProfile">Update Profile</button>
-
-        <table class="table table-striped" align="center" cellspacing="10">
+        
+        <!-- I have hard coded the data in the table. I wanted to see how the data will appear -->
+        <table class="table table-striped" align="center" cellspacing="10"  ng-controller="getprop">
             <thead>
                 <tr>
                     <th>Price</th>
@@ -53,14 +54,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>R 1 270 000</td>
-                    <td>301.28</td>
-                    <td>78 West St, Benmore Gardens</td>
-                    <td>Property For Sale</td>
-                    <td>Living a good life in Sand..</td>
-                    <td>Benmore gardens</td>
-                    <td>House</td>
+                <tr ng-repeat="x in propertytable | filter:searchProp">
+                    <td>{{x.price}}</td>
+                    <td>{{x.m2}}</td>
+                    <td>{{x.address}}</td>
+                    <td>{{x.title}}</td>
+                    <td>{{x.description}}</td>
+                    <td>{{x.suburb}}</td>
+                    <td>{{x.typee}}</td>
                     <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModalEdit">Edit</button></td>
                     <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalDelete">Delete</button></td>
                 </tr>
