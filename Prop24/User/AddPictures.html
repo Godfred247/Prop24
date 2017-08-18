@@ -3,23 +3,28 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
-    <script src="controller.js"></script>
+    <script src="../Scripts/jquery-3.1.1.js"></script>
+    <script src="../Scripts/angular.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <script src="../signup.js"></script>
 </head>
-<body ng-app="signUpApp" ng-controller="imageController">
-    <!--<div>
+<body ng-app="signUpApp" ng-controller="ImageCtrl">
+    <div>
         <div class="row container-fluid">
             <div class="col-lg-4">
-                <input type="file" ng-model="image" accept="image/*" multiple class="btn btn-info" />
+                <input type="file" ng-model="myFile" class="form-control" onchange="angular.element(this).scope().uploadedFile(this)" accept="image/*" multiple />
+            <button ng-click="uploadFile()" class="btn btn-block btn-success">Upload Image</button>
             </div>
         </div>
-        <div class="row">
+        <!--<div class="row">
             <div class="col-lg-4">
                 <img id="output" style="width:200px; height:150px" class="img-responsive" />
             </div>         
-        </div>
-    </div>-->
+        </div>-->
+    </div>
 
-    <table class="table table-striped">
+    <!--<table class="table table-striped">
         <thead>
             <tr>
                 <th>Title</th>
@@ -36,7 +41,7 @@
                 <td>{{x.size}}.com</td>
             </tr>         
         </tbody>
-    </table>
+    </table>-->
 
 </body>
 </html>

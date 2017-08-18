@@ -167,3 +167,37 @@ signupApp.controller('imageController', function ($scope, $http) {
         })
     }
 })
+
+signupApp.service('uploadFile', ['$http', function ($http) {
+    this.uploadFiletoServer = function (file, uploadUrl) {
+        var fd = new FormData();
+        fd.append('file', file);
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined, 'Process-Data': false }
+        }).then(function () {
+            alert("Image Added!");
+            }), function () {
+            alert("Error");
+        };
+    }
+}]);
+
+signupApp.controller('ImageCtrl', ['$scope', 'uploadFile', function ($scope, uploadFile) {
+    $scope.uploadFile = function () {
+        $scope.myFile = $scope.files[0];
+        var file = $scope.myFile;
+        var urlBase = "http://localhost:15446/api/Image";
+        uploadFile.uploadFiletoServer(file, urlBase);
+    };
+    $scope.uploadedFile = function (element) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            $scope.$apply(function ($scope) {
+                $scope.files = element.files;
+                $scope.src = event.target.result
+            });
+        }
+        reader.readAsDataURL(element.files[0]);
+    }
+}]);

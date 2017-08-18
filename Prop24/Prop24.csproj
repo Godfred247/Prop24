@@ -1129,7 +1129,6 @@
     <Content Include="Signup.html" />
     <Content Include="signup.js" />
     <Content Include="userIndex.html" />
-    <Content Include="userUpdate.html" />
     <Content Include="User\AddPictures.html" />
     <Content Include="User\controller.js" />
     <Content Include="User\imageController.js" />
