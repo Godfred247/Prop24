@@ -282,7 +282,6 @@
     <Content Include="add.html" />
     <Content Include="Angularhome.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
-    <Content Include="authInterceptorService.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
