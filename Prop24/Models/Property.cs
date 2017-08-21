@@ -18,7 +18,7 @@ namespace DataAccessLayer
         public string noOfBeds;
         public string noOfBaths;
         public string noOfGarages;
-        public Image image1;
+        public byte[] image1;
         public Image image2;
         public Image image3;
         public Image image4;
@@ -73,7 +73,7 @@ namespace DataAccessLayer
             get { return noOfGarages; }
             set { noOfGarages = value; }
         }
-        public Image Image1
+        public byte[] Image1
         {
             get { return image1; }
             set { image1 = value; }

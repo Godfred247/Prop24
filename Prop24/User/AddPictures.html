@@ -11,8 +11,8 @@
 </head>
 <body ng-app="signUpApp" ng-controller="ImageCtrl">
     <div>
-        <div class="row container-fluid">
-            <div class="col-lg-4">
+        <div class="form-group">
+            <div class="col-sm-10">
                 <input type="file" ng-model="myFile" class="form-control" onchange="angular.element(this).scope().uploadedFile(this)" accept="image/*" multiple />
             <button ng-click="uploadFile()" class="btn btn-block btn-success">Upload Image</button>
             </div>
