@@ -14,7 +14,8 @@ namespace Prop24.Controllers
         public string AddImage()
         {
             Image img = new Image();
-            
+
+            // hfc stands for HttpFileCollection 
             HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
 
            for (int i = 0; i < hfc.Count; i++)
@@ -29,7 +30,6 @@ namespace Prop24.Controllers
                     file.InputStream.Read(buffer,0,file.ContentLength);
                     img.image = buffer;
                     img.name = fileName;
-                    img.description = "Property Images";
                 }
             }
 

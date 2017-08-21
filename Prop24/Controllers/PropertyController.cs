@@ -2,6 +2,7 @@
 using Prop24.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -17,7 +18,7 @@ namespace Prop24.Controllers
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/Property")]
         public string PropAdd(Property pr)
-        {
+        { 
             return dal.PropAdd(pr);
         }
 

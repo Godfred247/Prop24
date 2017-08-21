@@ -9,7 +9,6 @@ namespace Prop24.Models
     {
         public byte[] image;
         public string name;
-        public string description;
 
         public byte[] ImageData
         {
@@ -21,20 +20,14 @@ namespace Prop24.Models
             get { return name; }
             set { name = value; }
         }
-        public string Description
-        {
-            get { return description; }
-            set { description = value; }
-        }
         public Image()
         {
 
         }
-        public Image(byte[] iimage, string nname, string ddescription)
+        public Image(byte[] iimage, string nname)
         {
             name = nname;
             image = iimage;
-            description = ddescription;
         }
     }
 }

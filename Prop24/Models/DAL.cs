@@ -96,6 +96,7 @@ namespace Prop24.Models
                 dbcm.Parameters.AddWithValue("_Beds", prop.noOfBeds);
                 dbcm.Parameters.AddWithValue("_Baths", prop.noOfBaths);
                 dbcm.Parameters.AddWithValue("_Garage", prop.noOfGarages);
+                dbcm.Parameters.AddWithValue("_Image1", prop.image1);
 
                 dbCon.Open();
                 int d = dbcm.ExecuteNonQuery();
@@ -208,26 +209,15 @@ namespace Prop24.Models
                 MySqlCommand dbCmd = new MySqlCommand("spInsertImage", dbCon);
 
                 dbCmd.CommandType = CommandType.StoredProcedure;
-                MySqlParameter[] paras = new MySqlParameter[3];
+                MySqlParameter[] paras = new MySqlParameter[2];
                 paras[0] = new MySqlParameter("_Image", MySqlDbType.MediumBlob);
                 paras[0].Value = img.image;
 
                 paras[1] = new MySqlParameter("_Name", MySqlDbType.String);
                 paras[1].Value = img.name;
-
-                paras[2] = new MySqlParameter("_Description", MySqlDbType.String);
-                paras[2].Value = img.description;
-
+              
                 dbCmd.Parameters.AddRange(paras);
-                //dbCmd.Parameters.Add(new MySqlParameter("_Image", MySqlDbType.Byte));
-                //dbCmd.Parameters["_Image"].Value = img.image;
-                ////dbCmd.Parameters.AddWithValue("_Image", img.image);
-                //dbCmd.Parameters.Add(new MySqlParameter("_Name", MySqlDbType.String));
-                //dbCmd.Parameters["_Name"].Value = img.name;
-                //dbCmd.Parameters.Add(new MySqlParameter("_Description", MySqlDbType.String));
-                //dbCmd.Parameters["_Description"].Value = img.description;
-                
-
+               
                 dbCon.Open();
                 dbCmd.ExecuteNonQuery();
                 dbCon.Close();

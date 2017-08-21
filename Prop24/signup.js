@@ -95,8 +95,8 @@ signupApp.controller("propController", ['$scope', 'AddProperty', function ($scop
 
     $scope.addProp = function () {
         AddProperty.saveProperty($scope.property).then(function () {
-            alert("Property added!");
-            window.location.href = "userIndex.html"
+            alert("Property added!. Click 'OK' to add images to the property");
+            window.location.href = "User/AddPictures.html"
         }, function () {
             alert("Property not added. Try again");
         })
@@ -176,7 +176,7 @@ signupApp.service('uploadFile', ['$http', function ($http) {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined, 'Process-Data': false }
         }).then(function () {
-            alert("Image Added!");
+            alert("Image/s Added!");
             }), function () {
             alert("Error");
         };

@@ -122,6 +122,7 @@
                                 <input type="text" class="form-control" id="suburb" placeholder="Suburb" ng-model="property.suburb">
                             </div>
                         </div>
+                       
                         <div class="form-group">
                             <label class="control-label col-sm-2">Type</label>
                             <div class="col-sm-10">
@@ -167,36 +168,13 @@
                                     <option value="5+">5+</option>
                                 </select>
                             </div>
-                        </div>
-                            <!--<div class="form-group">
-                                <label class="control-label col-sm-2">Image 1</label>
-                                <div class="col-sm-10">
-                                    <input type="file" accept="image/*" multiple ng-model="image1" onchange="angular.element(this).scope().uploadedFile1(this)" class="form-control" id="image1" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2">Image 2</label>
-                                <div class="col-sm-10">
-                                    <input type="file" accept="image/*" ng-model="image2" onchange="angular.element(this).scope().uploadedFile2(this)" class="form-control" id="image2" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2">Image 3</label>
-                                <div class="col-sm-10">
-                                    <input type="file" accept="image/*" ng-model="image3" onchange="angular.element(this).scope().uploadedFile3(this)" class="form-control" id="image3" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-sm-2">Image 4</label>
-                                <div class="col-sm-10">
-                                    <input type="file" accept="image/*" ng-model="image4" onchange="angular.element(this).scope().uploadedFile4(this)" class="form-control" id="image4" />
-                                </div>
-                            </div>-->
+                        </div>                     
                           <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-default" ng-click="addProp()">Save</button>
                             </div>
                         </div>
+                        <br ng-model="imageProp" />
                     </form>
 
                 </div>
@@ -374,5 +352,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+
+    <footer class="container-fluid text-center">
+        <h3>Property24 &copy; Rights Reserved</h3>
+    </footer>
 </body>
 </html>
