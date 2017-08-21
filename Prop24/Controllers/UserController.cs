@@ -1,6 +1,8 @@
 ﻿using System.Web.Http;
 using DataAccessLayer;
 using Prop24.Models;
+using System.Net.Mail;
+using System.Net;
 
 namespace Prop24.Controllers
 {
@@ -30,5 +32,27 @@ namespace Prop24.Controllers
         {
             return dal.userLogin(email, password);
         }
+
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public string PostSendEmail()
+        //{
+        //    SmtpClient client = new SmtpClient();
+        //    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+        //    client.EnableSsl = true;
+        //    client.Host = "smtp.gmail.com";
+        //    client.Port = 587;
+
+        //    NetworkCredential cred = new NetworkCredential("gpnkumane@gmail.com", "Nqaba247");
+        //    client.UseDefaultCredentials = false;
+        //    client.Credentials = cred;
+
+        //    MailMessage msg = new MailMessage();
+        //    msg.From = new MailAddress("gpnkumane@gmail.com");
+        //    msg.To.Add(new MailAddress(""));
+        //    msg.Subject = "Property details";
+        //    msg.IsBodyHtml = true;
+        //    msg.Body = string.Format("<html><head></head><body><b>");
+        //}
     }
 }

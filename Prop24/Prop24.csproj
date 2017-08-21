@@ -1130,6 +1130,7 @@
     <Content Include="signup.js" />
     <Content Include="userIndex.html" />
     <Content Include="User\AddPictures.html" />
+    <Content Include="User\ContactAgent.html" />
     <Content Include="User\controller.js" />
     <Content Include="User\imageController.js" />
     <Content Include="User\Login.html" />
@@ -1152,7 +1153,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Property\" />
