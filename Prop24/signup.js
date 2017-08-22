@@ -85,16 +85,15 @@ signupApp.controller("propController", ['$scope', 'AddProperty', function ($scop
         typee: "",
         noOfBeds: "",
         noOfBaths: "",
-        noOfGarages: "",
-        image1: "",
-        image2: "",
-        image3: "",
-        image4: ""
+        noOfGarages: ""
     }
     $scope.prop = [];
 
     $scope.addProp = function () {
         AddProperty.saveProperty($scope.property).then(function () {
+            //get property id
+            //var data = "?price"
+            AddProperty.GetProperty($scope.price, $scope.m2, $scope.address, $scope.title, $scope.description, $scope.suburb, $scope.typee, $scope.noOfBeds, $scope.noOfBaths, $scope.noOfGarages).then(function () { })
             alert("Property added!. Click 'OK' to add images to the property");
             window.location.href = "User/AddPictures.html"
         }, function () {
@@ -106,6 +105,12 @@ signupApp.controller("propController", ['$scope', 'AddProperty', function ($scop
 signupApp.factory('AddProperty', function ($http) {
     AddProperty = {};
     var urlBase = "http://localhost:15446/Api/"
+    //var url = "http:/localhost:15446/api/propId"
+
+    //get request
+    AddProperty.GetProperty = function (price, m2, address, title, description, suburb, typee, noOfBeds, noOfBaths, noOfGarages) {
+        return $http.get(urlBase + "/propId?price=" + price + "&m2=" + m2 + "&address=" + address + "&title=" + title + "&description=" + description + "&suburb=" + suburb + "&typee=" + typee + "&noOfBeds=" + noOfBeds + "&noOfBaths=" + noOfBaths + "&noOfGarages=" + noOfGarages)
+    }
 
     AddProperty.saveProperty = function (PropAdd) {
         return $http.post(urlBase + '/Property/', PropAdd)

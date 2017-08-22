@@ -8,6 +8,7 @@ namespace DataAccessLayer
 {
     public class Property
     {
+        public int propertyID;
         public string price;
         public string m2;
         public string address;
@@ -22,6 +23,12 @@ namespace DataAccessLayer
         public Image image2;
         public Image image3;
         public Image image4;
+
+        public int PropertyID
+        {
+            get { return propertyID; }
+            set { propertyID = value; }
+        }
         public string Price
         {
             get { return price; }
@@ -93,8 +100,9 @@ namespace DataAccessLayer
             get { return image4; }
             set { image4 = value; }
         }
-        public Property(string PPrice, string PM2, string PAddress, string PTitle, string PDescription, string PSuburb, string PTypee, string PBeds, string PBaths, string PGarages)
+        public Property(int propID, string PPrice, string PM2, string PAddress, string PTitle, string PDescription, string PSuburb, string PTypee, string PBeds, string PBaths, string PGarages)
         {
+            propertyID = propID;
             price = PPrice;
             m2 = PM2;
             address = PAddress;

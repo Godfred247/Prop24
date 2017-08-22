@@ -109,6 +109,69 @@ namespace Prop24.Models
             }
         }
 
+        public Property getPropId(string price, string m2, string address, string title, string description, string suburb, string typee, string noOfBeds, string noOfBaths, string noOfGarages)
+        {
+            Property pp = new Property();
+            using (MySqlConnection dbCon = new MySqlConnection(connString))
+            {
+                MySqlCommand dbcmd = new MySqlCommand("spGetPropID", dbCon);
+                dbcmd.CommandType = CommandType.StoredProcedure;
+              
+                dbcmd.Parameters.Add(new MySqlParameter("_price", MySqlDbType.String));
+                dbcmd.Parameters["price"].Value = price;
+                dbcmd.Parameters.Add(new MySqlParameter("_m2", MySqlDbType.String));
+                dbcmd.Parameters["m2"].Value = m2;
+                dbcmd.Parameters.Add(new MySqlParameter("_address", MySqlDbType.String));
+                dbcmd.Parameters["address"].Value = address;
+                dbcmd.Parameters.Add(new MySqlParameter("_title", MySqlDbType.String));
+                dbcmd.Parameters["title"].Value = title;
+                dbcmd.Parameters.Add(new MySqlParameter("_description", MySqlDbType.String));
+                dbcmd.Parameters["description"].Value = description;
+                dbcmd.Parameters.Add(new MySqlParameter("_suburb", MySqlDbType.String));
+                dbcmd.Parameters["suburb"].Value = suburb;
+                dbcmd.Parameters.Add(new MySqlParameter("_typee", MySqlDbType.String));
+                dbcmd.Parameters["typee"].Value = typee;
+                dbcmd.Parameters.Add(new MySqlParameter("_noOfBeds", MySqlDbType.String));
+                dbcmd.Parameters["noOfBeds"].Value = noOfBeds;
+                dbcmd.Parameters.Add(new MySqlParameter("_noOfBaths", MySqlDbType.String));
+                dbcmd.Parameters["noOfBaths"].Value = noOfBaths;
+                dbcmd.Parameters.Add(new MySqlParameter("_noOfGarages", MySqlDbType.String));
+                dbcmd.Parameters["noOfGarages"].Value = noOfGarages;
+
+                Property propy = null;
+
+                try
+                {
+                    if (dbCon.State == ConnectionState.Closed)
+                    {
+                        dbCon.Open();
+                    }
+                    MySqlDataReader rdr = dbcmd.ExecuteReader();
+
+                    while (rdr.Read())
+                    {
+                        propy = new Property(Convert.ToInt32(rdr["propertyID"]),
+                            Convert.ToString(rdr["price"]),
+                            Convert.ToString(rdr["m2"]),
+                            Convert.ToString(rdr["address"]),
+                            Convert.ToString(rdr["title"]),
+                            Convert.ToString(rdr["description"]),
+                            Convert.ToString(rdr["suburb"]),
+                            Convert.ToString(rdr["typee"]),
+                            Convert.ToString(rdr["noOfBeds"]),
+                            Convert.ToString(rdr["noOfBaths"]),
+                            Convert.ToString(rdr["noOfGarages"]));
+                    }
+                    rdr.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    throw new Exception(ex.ToString());
+                }
+                return propy;
+            }
+        }
+
         public User usrUpdate(int userId, string name, string mobileNumber, string password, string area, string province)
         {
             using (MySqlConnection dbCon = new MySqlConnection(connString))
@@ -260,5 +323,28 @@ namespace Prop24.Models
                 return ex.ToString();
             }
         }
+
+        //public Image[] GetImage()
+        //{
+        //    List<Image> imgList = new List<Image>();
+
+        //    using (MySqlConnection dbCon = new MySqlConnection(connString))
+        //    {
+        //        if (dbCon.State == ConnectionState.Closed)
+        //        {
+        //            dbCon.Open();
+        //        }
+        //        MySqlCommand dbCmd = new MySqlCommand("spGetImages", dbCon);
+        //        dbCmd.CommandType = CommandType.StoredProcedure;
+
+        //        MySqlDataReader rdr = dbCmd.ExecuteReader();
+
+        //        //while(rdr.Read())
+        //        //{
+        //        //    Image img = Convert.T rdr["imagedate"].ToString();
+        //        //}
+
+        //    }
+        //}
     }
 }

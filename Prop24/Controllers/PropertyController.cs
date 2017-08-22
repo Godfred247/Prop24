@@ -29,5 +29,12 @@ namespace Prop24.Controllers
         {
             return dal.GetProperty();
         }
+
+        [HttpGet]
+        [Route("api/propId")]
+        public Property getPropId(string price, string m2, string address, string title, string description, string suburb, string typee, string noOfBeds, string noOfBaths, string noOfGarages)
+        {
+            return dal.getPropId(price, m2, address, title, description, suburb, typee, noOfBeds, noOfBaths, noOfGarages);
+        }
     }
 }
