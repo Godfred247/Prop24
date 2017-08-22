@@ -201,3 +201,32 @@ signupApp.controller('ImageCtrl', ['$scope', 'uploadFile', function ($scope, upl
         reader.readAsDataURL(element.files[0]);
     }
 }]);
+
+signupApp.controller('EmailCtrl', ['$scope', 'emailService', function ($scope, emailService) {
+    $scope.emailSe = {
+        emailName: "",
+        emailFrom: "",
+        emailNumber: "",
+        emailBody: ""
+    }
+
+    $scope.sendEmail = function () {
+        emailService.sendEm($scope.emailSe).then(function () {
+            alert("Email Sent. Thank You");
+            window.location.href = "../index.html";
+        }), function () {
+            alert("Email could not be sent");
+
+        }
+    }
+}])
+
+signupApp.factory('emailService', function ($http) {
+    emailService = {};
+
+    var urlBase = "http://localhost:15446/api/email"
+    emailService.sendEm = function (PostSendEmail) {
+        return $http.post(urlBase, PostSendEmail)
+    }
+    return emailService;
+})

@@ -7,6 +7,9 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using Prop24.Models;
+using System.Net.Mail;
+using System.Net;
+
 namespace Prop24.Models
 {
     public class DAL
@@ -223,6 +226,38 @@ namespace Prop24.Models
                 dbCon.Close();
 
                 return "Image Added";
+            }
+        }
+
+        public string PostSendEmail(Email email)
+        {
+            SmtpClient client = new SmtpClient();
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.EnableSsl = true;
+            client.Host = "smtp.gmail.com";
+            client.Port = 587;
+
+            NetworkCredential cred = new NetworkCredential("gpnkumane@gmail.com", "Nqaba247");
+            client.UseDefaultCredentials = false;
+            client.Credentials = cred;
+
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress(email.emailFrom);
+            //msg.Sender = new MailAddress(email.emailFrom);
+            msg.To.Add(new MailAddress("gpnkumane@gmail.com"));
+            msg.Subject = "Property Details";
+            msg.IsBodyHtml = true;
+            msg.Body = string.Format("<html><head><head><body><b>Name: </b>" + email.emailName + "<br /><br />" + "<b>Email: </b>" + email.emailFrom + "<br /><br />" + "<b>Mobile Number: </b>" + email.emailNumber + "<br /><br />" + email.emailBody + "</body></html>");
+            
+
+            try
+            {
+                client.Send(msg);
+                return "Email Sent Successfully";
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
             }
         }
     }

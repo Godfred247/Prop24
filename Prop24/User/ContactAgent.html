@@ -10,27 +10,39 @@
     <script src="../signup.js"></script>
 
 </head>
-<body>
+<body ng-app="signUpApp">
     <br />
     <h2>Contact Agent</h2>
     <hr />
-    <form class="form-horizontal"> 
+    <form class="form-horizontal" ng-controller="EmailCtrl">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Name</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="Your Name" ng-model="emailSe.emailName">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Email</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="Your Email" ng-model="emailSe.emailFrom">
+            </div>
+        </div> 
             <div class="form-group">
-                <label class="control-label col-sm-2">Subject</label>
+                <label class="control-label col-sm-2">Mobile Number</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" ng-model="property.price">
+                    <input type="text" class="form-control" placeholder="Your Mobile" ng-model="emailSe.emailNumber">
                 </div>
             </div>
         <div class="form-group">
             <label class="control-label col-sm-2">Message</label>
             <div class="col-sm-3">
-                <textarea ng-model="myTextarea"class="form-control" style="height:200px"></textarea>
+                <textarea ng-model="emailSe.emailBody"class="form-control" placeholder="Property Description and Details" style="height:200px"></textarea>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2"></label>
             <div class="col-sm-3">
-                <button type="submit" class="btn btn-block btn-success">Send Email</button>
+                <button type="submit" ng-click="sendEmail()" class="btn btn-block btn-success">Send Email</button>
             </div>
         </div> 
     </form>

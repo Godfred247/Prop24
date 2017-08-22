@@ -1,1 +1,0 @@
-﻿/// <reference path="C:\Users\User\Documents\Prop24\Prop24\Scripts/angular.js" />
