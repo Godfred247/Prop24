@@ -111,64 +111,73 @@ namespace Prop24.Models
 
         public Property getPropId(string price, string m2, string address, string title, string description, string suburb, string typee, string noOfBeds, string noOfBaths, string noOfGarages)
         {
-            Property pp = new Property();
+            //List<Property> list = new List<Property>();
+            Property prop = new Property();
+            
             using (MySqlConnection dbCon = new MySqlConnection(connString))
             {
+                
+                if (dbCon.State == ConnectionState.Closed)
+                {
+                    dbCon.Open();
+                }
+
                 MySqlCommand dbcmd = new MySqlCommand("spGetPropID", dbCon);
                 dbcmd.CommandType = CommandType.StoredProcedure;
-              
+
                 dbcmd.Parameters.Add(new MySqlParameter("_price", MySqlDbType.String));
-                dbcmd.Parameters["price"].Value = price;
+                dbcmd.Parameters["_price"].Value = price;
                 dbcmd.Parameters.Add(new MySqlParameter("_m2", MySqlDbType.String));
-                dbcmd.Parameters["m2"].Value = m2;
+                dbcmd.Parameters["_m2"].Value = m2;
                 dbcmd.Parameters.Add(new MySqlParameter("_address", MySqlDbType.String));
-                dbcmd.Parameters["address"].Value = address;
+                dbcmd.Parameters["_address"].Value = address;
                 dbcmd.Parameters.Add(new MySqlParameter("_title", MySqlDbType.String));
-                dbcmd.Parameters["title"].Value = title;
+                dbcmd.Parameters["_title"].Value = title;
                 dbcmd.Parameters.Add(new MySqlParameter("_description", MySqlDbType.String));
-                dbcmd.Parameters["description"].Value = description;
+                dbcmd.Parameters["_description"].Value = description;
                 dbcmd.Parameters.Add(new MySqlParameter("_suburb", MySqlDbType.String));
-                dbcmd.Parameters["suburb"].Value = suburb;
+                dbcmd.Parameters["_suburb"].Value = suburb;
                 dbcmd.Parameters.Add(new MySqlParameter("_typee", MySqlDbType.String));
-                dbcmd.Parameters["typee"].Value = typee;
+                dbcmd.Parameters["_typee"].Value = typee;
                 dbcmd.Parameters.Add(new MySqlParameter("_noOfBeds", MySqlDbType.String));
-                dbcmd.Parameters["noOfBeds"].Value = noOfBeds;
+                dbcmd.Parameters["_noOfBeds"].Value = noOfBeds;
                 dbcmd.Parameters.Add(new MySqlParameter("_noOfBaths", MySqlDbType.String));
-                dbcmd.Parameters["noOfBaths"].Value = noOfBaths;
+                dbcmd.Parameters["_noOfBaths"].Value = noOfBaths;
                 dbcmd.Parameters.Add(new MySqlParameter("_noOfGarages", MySqlDbType.String));
-                dbcmd.Parameters["noOfGarages"].Value = noOfGarages;
+                dbcmd.Parameters["_noOfGarages"].Value = noOfGarages;
 
                 Property propy = null;
 
+                MySqlDataReader rdr = dbcmd.ExecuteReader();
+
+                while(rdr.Read())
+                {
+                    propy = new Property(Convert.ToInt32(rdr["propertyID"]),
+                          Convert.ToString(rdr["price"]),
+                          Convert.ToString(rdr["m2"]),
+                          Convert.ToString(rdr["address"]),
+                          Convert.ToString(rdr["title"]),
+                          Convert.ToString(rdr["description"]),
+                          Convert.ToString(rdr["suburb"]),
+                          Convert.ToString(rdr["typee"]),
+                          Convert.ToString(rdr["noOfBeds"]),
+                          Convert.ToString(rdr["noOfBaths"]),
+                          Convert.ToString(rdr["noOfGarages"]));               
+                }
                 try
                 {
-                    if (dbCon.State == ConnectionState.Closed)
-                    {
-                        dbCon.Open();
-                    }
-                    MySqlDataReader rdr = dbcmd.ExecuteReader();
-
-                    while (rdr.Read())
-                    {
-                        propy = new Property(Convert.ToInt32(rdr["propertyID"]),
-                            Convert.ToString(rdr["price"]),
-                            Convert.ToString(rdr["m2"]),
-                            Convert.ToString(rdr["address"]),
-                            Convert.ToString(rdr["title"]),
-                            Convert.ToString(rdr["description"]),
-                            Convert.ToString(rdr["suburb"]),
-                            Convert.ToString(rdr["typee"]),
-                            Convert.ToString(rdr["noOfBeds"]),
-                            Convert.ToString(rdr["noOfBaths"]),
-                            Convert.ToString(rdr["noOfGarages"]));
-                    }
                     rdr.Close();
+                    MySqlDataReader reader = dbcmd.ExecuteReader(CommandBehavior.SingleRow);
+                    reader.Read();
+                    reader.Close();
                 }
                 catch (MySqlException ex)
                 {
-                    throw new Exception(ex.ToString());
+                    throw new ApplicationException(ex.ToString());
                 }
                 return propy;
+
+                
             }
         }
 

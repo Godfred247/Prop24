@@ -104,8 +104,7 @@ signupApp.controller("propController", ['$scope', 'AddProperty', function ($scop
 
 signupApp.factory('AddProperty', function ($http) {
     AddProperty = {};
-    var urlBase = "http://localhost:15446/Api/"
-    //var url = "http:/localhost:15446/api/propId"
+    var urlBase = "http://localhost:15446/Api/"    
 
     //get request
     AddProperty.GetProperty = function (price, m2, address, title, description, suburb, typee, noOfBeds, noOfBaths, noOfGarages) {
