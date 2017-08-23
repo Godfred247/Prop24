@@ -1,4 +1,5 @@
 ﻿using Prop24.Models;
+using System;
 using System.IO;
 using System.Web;
 using System.Web.Http;
@@ -18,6 +19,9 @@ namespace Prop24.Controllers
             // hfc stands for HttpFileCollection 
             HttpFileCollection hfc = System.Web.HttpContext.Current.Request.Files;
 
+            string url = HttpContext.Current.Request.Url.AbsoluteUri;
+            
+
            for (int i = 0; i < hfc.Count; i++)
             {
                 System.Web.HttpPostedFile file = hfc[i];
@@ -30,6 +34,7 @@ namespace Prop24.Controllers
                     file.InputStream.Read(buffer,0,file.ContentLength);
                     img.image = buffer;
                     img.name = fileName;
+                    img.propertyID = Convert.ToInt32(url);
                 }
             }
 

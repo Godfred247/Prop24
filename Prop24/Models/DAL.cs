@@ -111,9 +111,7 @@ namespace Prop24.Models
 
         public Property getPropId(string price, string m2, string address, string title, string description, string suburb, string typee, string noOfBeds, string noOfBaths, string noOfGarages)
         {
-            //List<Property> list = new List<Property>();
-            Property prop = new Property();
-            
+                     
             using (MySqlConnection dbCon = new MySqlConnection(connString))
             {
                 
@@ -175,9 +173,7 @@ namespace Prop24.Models
                 {
                     throw new ApplicationException(ex.ToString());
                 }
-                return propy;
-
-                
+                return propy;            
             }
         }
 

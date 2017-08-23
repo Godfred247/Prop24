@@ -92,12 +92,13 @@ signupApp.controller("propController", ['$scope', 'AddProperty', function ($scop
     $scope.addProp = function () {
         AddProperty.saveProperty($scope.property).then(function () {
             //get property id
-            //var data = "?price"
-            AddProperty.GetProperty($scope.price, $scope.m2, $scope.address, $scope.title, $scope.description, $scope.suburb, $scope.typee, $scope.noOfBeds, $scope.noOfBaths, $scope.noOfGarages).then(function () { })
-            alert("Property added!. Click 'OK' to add images to the property");
+            AddProperty.GetProperty($scope.price, $scope.m2, $scope.address, $scope.title, $scope.description, $scope.suburb, $scope.typee, $scope.noOfBeds, $scope.noOfBaths, $scope.noOfGarages).then(function (response) { })
+            $scope.pro = response.data;
+            alert("Property added!. Click 'OK' to add images to the property " + response.data.title);
             window.location.href = "User/AddPictures.html"
         }, function () {
             alert("Property not added. Try again");
+             
         })
     }
 }]);
@@ -107,13 +108,14 @@ signupApp.factory('AddProperty', function ($http) {
     var urlBase = "http://localhost:15446/Api/"    
 
     //get request
-    AddProperty.GetProperty = function (price, m2, address, title, description, suburb, typee, noOfBeds, noOfBaths, noOfGarages) {
-        return $http.get(urlBase + "/propId?price=" + price + "&m2=" + m2 + "&address=" + address + "&title=" + title + "&description=" + description + "&suburb=" + suburb + "&typee=" + typee + "&noOfBeds=" + noOfBeds + "&noOfBaths=" + noOfBaths + "&noOfGarages=" + noOfGarages)
+    AddProperty.saveProperty = function (PropAdd) {
+        return $http.post(urlBase + 'Property', PropAdd)
     }
 
-    AddProperty.saveProperty = function (PropAdd) {
-        return $http.post(urlBase + '/Property/', PropAdd)
+     AddProperty.GetProperty = function (price, m2, address, title, description, suburb, typee, noOfBeds, noOfBaths, noOfGarages) {
+        return $http.get(urlBase + "propId?price=" + price + "&m2=" + m2 + "&address=" + address + "&title=" + title + "&description=" + description + "&suburb=" + suburb + "&typee=" + typee + "&noOfBeds=" + noOfBeds + "&noOfBaths=" + noOfBaths + "&noOfGarages=" + noOfGarages)
     }
+
     return AddProperty;
 });
 
@@ -187,11 +189,12 @@ signupApp.service('uploadFile', ['$http', function ($http) {
     }
 }]);
 
-signupApp.controller('ImageCtrl', ['$scope', 'uploadFile', function ($scope, uploadFile) {
+signupApp.controller('ImageCtrl', ['$scope', '$rootScope', 'uploadFile', function ($scope, $rootScope, uploadFile) {
+    $rootScope.pro.propertyID;
     $scope.uploadFile = function () {
         $scope.myFile = $scope.files[0];
         var file = $scope.myFile;
-        var urlBase = "http://localhost:15446/api/Image";
+        var urlBase = "http://localhost:15446/api/Image" + "?properyID=" + $rootScope.pro.propertyID;
         uploadFile.uploadFiletoServer(file, urlBase);
     };
     $scope.uploadedFile = function (element) {
