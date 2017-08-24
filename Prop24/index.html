@@ -129,7 +129,7 @@
                                         <td>{{x.description}}</td>
                                         <td>{{x.suburb}}</td>
                                         <td>{{x.typee}}</td>
-                                        <td><a href="javascript:;" ng-click="getHouse(x)"><span class="glyphicon glyphicon-transfer"></span></a></td>
+                                        <td><a href="javascript:;" ng-click="getHouse(x)"><img style="width:150px; height:150px" ng-src="{{'data:image/jpeg;base64,'+x.imagedata}}" /></a></td>                                      
                                     </tr>
                                 </tbody>
                             </table>
@@ -137,7 +137,7 @@
 
                         <!--View House Model  -->
                         <div ng-app="signUpApp" ng-controller="getprop">
-                            <div class="modal fade" id="myModalView" tabindex="-1" role="dialog">
+                            <div class="modal fade" id="myModalView" role="dialog">
                                 <div class="modal-dialog">
 
                                     <!-- Modal content-->
@@ -179,13 +179,21 @@
                                                         <input type="text" value="{{propertyModel.typee}}" style="width:450px" class="form-control" readonly="readonly">
                                                     </div>
                                                 </div>
-                                                <!--<a href="User/ContactAgent.html">Contact Agent</a>-->
-                                                <hr />
                                                 <div class="form-group">
-                                                    <div class="col-sm-offset-2 col-sm-10">
-                                                        <button type="submit" class="btn btn-block btn-success" onclick="location.href = 'User/ContactAgent.html'">Contact Agent</button>
+                                                    <label class="control-label col-sm-2">Image</label>
+                                                    <div class="col-sm-10">
+                                                        <img id="imagedata" ng-src="{{'data:image/jpeg;base64,'+propertyModel.imagedata}}" style="width:150px; height:150px" />                                                  
                                                     </div>
                                                 </div>
+                                                <!--<a href="User/ContactAgent.html">Contact Agent</a>-->
+                                                
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button style="width:150px" type="submit" class="btn btn-block btn-success" onclick="location.href = 'User/ContactAgent.html'">Contact Agent</button>
+                                                    </div>
+                                                </div>
+                                                <br />
+
                                             </form>
 
                                         </div>

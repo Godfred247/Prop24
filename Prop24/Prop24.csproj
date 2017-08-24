@@ -290,6 +290,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\default-user-image.png" />
     <Content Include="index.html" />
     <Content Include="login.html" />
     <Content Include="prop.html" />
@@ -1133,6 +1134,7 @@
     <Content Include="User\ContactAgent.html" />
     <Content Include="User\imageController.js" />
     <Content Include="User\Login.html" />
+    <Content Include="User\Payment.html" />
     <Content Include="User\Register.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

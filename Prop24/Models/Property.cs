@@ -19,10 +19,7 @@ namespace DataAccessLayer
         public string noOfBeds;
         public string noOfBaths;
         public string noOfGarages;
-        public byte[] image1;
-        public Image image2;
-        public Image image3;
-        public Image image4;
+        public byte[] imagedata;      
 
         public int PropertyID
         {
@@ -82,24 +79,9 @@ namespace DataAccessLayer
         }
         public byte[] Image1
         {
-            get { return image1; }
-            set { image1 = value; }
-        }
-        public Image Image2
-        {
-            get { return image2; }
-            set { image2 = value; }
-        }
-        public Image Image3
-        {
-            get { return image3; }
-            set { image3 = value; }
-        }
-        public Image Image4
-        {
-            get { return image4; }
-            set { image4 = value; }
-        }
+            get { return imagedata; }
+            set { imagedata = value; }
+        }      
         public Property(int propID, string PPrice, string PM2, string PAddress, string PTitle, string PDescription, string PSuburb, string PTypee, string PBeds, string PBaths, string PGarages)
         {
             propertyID = propID;

@@ -9,6 +9,7 @@ using System.Web;
 using Prop24.Models;
 using System.Net.Mail;
 using System.Net;
+using System.Text;
 
 namespace Prop24.Models
 {
@@ -99,7 +100,6 @@ namespace Prop24.Models
                 dbcm.Parameters.AddWithValue("_Beds", prop.noOfBeds);
                 dbcm.Parameters.AddWithValue("_Baths", prop.noOfBaths);
                 dbcm.Parameters.AddWithValue("_Garage", prop.noOfGarages);
-                dbcm.Parameters.AddWithValue("_Image1", prop.image1);
 
                 dbCon.Open();
                 int d = dbcm.ExecuteNonQuery();
@@ -109,7 +109,7 @@ namespace Prop24.Models
             }
         }
 
-        public Property getPropId(string price, string m2, string address, string title, string description, string suburb, string typee, string noOfBeds, string noOfBaths, string noOfGarages)
+        public Property GetPropertyId(string price, string m2, string address, string title, string description, string suburb, string typee, string noOfBeds, string noOfBaths, string noOfGarages)
         {
                      
             using (MySqlConnection dbCon = new MySqlConnection(connString))
@@ -243,18 +243,17 @@ namespace Prop24.Models
 
                 while(rdr.Read())
                 {
+                    
                     Property property = new Property();
 
                     property.price = rdr["price"].ToString();
-                    property.m2 = rdr["m2"].ToString();
                     property.address = rdr["address"].ToString();
                     property.title = rdr["title"].ToString();
                     property.description = rdr["description"].ToString();
                     property.suburb = rdr["suburb"].ToString();
                     property.typee = rdr["typee"].ToString();
-                    property.noOfBeds = rdr["noOfBeds"].ToString();
-                    property.noOfBaths = rdr["noOfBaths"].ToString();
-                    property.noOfGarages = rdr["noOfGarages"].ToString();
+                    //property.imagedata = Convert.ToBase64String((byte[])(rdr["imagedata"]));
+                    property.imagedata = ((byte[])(rdr["imagedata"]));                
 
                     propList.Add(property);
                 }
@@ -328,28 +327,5 @@ namespace Prop24.Models
                 return ex.ToString();
             }
         }
-
-        //public Image[] GetImage()
-        //{
-        //    List<Image> imgList = new List<Image>();
-
-        //    using (MySqlConnection dbCon = new MySqlConnection(connString))
-        //    {
-        //        if (dbCon.State == ConnectionState.Closed)
-        //        {
-        //            dbCon.Open();
-        //        }
-        //        MySqlCommand dbCmd = new MySqlCommand("spGetImages", dbCon);
-        //        dbCmd.CommandType = CommandType.StoredProcedure;
-
-        //        MySqlDataReader rdr = dbCmd.ExecuteReader();
-
-        //        //while(rdr.Read())
-        //        //{
-        //        //    Image img = Convert.T rdr["imagedate"].ToString();
-        //        //}
-
-        //    }
-        //}
     }
 }

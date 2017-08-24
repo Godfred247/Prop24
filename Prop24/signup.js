@@ -27,12 +27,10 @@ signupApp.factory('signupService', function ($http) {
     return signupService;
 });
 
-signupApp.controller('updateController', ['$scope', '$rootScope', '$window', 'upDateService', function ($scope, $rootScope, $window, upDateService) {
+signupApp.controller('updateController', ['$scope', '$window', 'upDateService', function ($scope, $window, upDateService) {
     $scope.btnText = "Update";
-    $rootScope.logged;
     $scope.upDate = function () {
         $scope.btnText = "Please Wait...";
-        $scope.labelValue = logged.email
         upDateService.saveUpdate({name: $scope.name, mobileNumber: $scope.mobileNumber, password: $scope.password,area: $scope.area, province: $scope.province}).then(function (response) {
             if (response.data == null)
             {
@@ -74,7 +72,7 @@ signupApp.controller('getprop',['$scope', '$http', function ($scope, $http) {
     }
 }]);
 
-signupApp.controller("propController", ['$scope', 'AddProperty', function ($scope, AddProperty) {
+signupApp.controller("propController", ['$scope', '$rootScope', 'AddProperty', 'GetProperty', function ($scope, $rootScope, AddProperty, GetProperty) {
     $scope.property = {
         price: "",
         m2: "",
@@ -92,32 +90,40 @@ signupApp.controller("propController", ['$scope', 'AddProperty', function ($scop
     $scope.addProp = function () {
         AddProperty.saveProperty($scope.property).then(function () {
             //get property id
-            AddProperty.GetProperty($scope.price, $scope.m2, $scope.address, $scope.title, $scope.description, $scope.suburb, $scope.typee, $scope.noOfBeds, $scope.noOfBaths, $scope.noOfGarages).then(function (response) { })
-            $scope.pro = response.data;
-            alert("Property added!. Click 'OK' to add images to the property " + response.data.title);
-            window.location.href = "User/AddPictures.html"
+            GetProperty.getprop($scope.price, $scope.m2, $scope.address, $scope.title, $scope.description, $scope.suburb, $scope.typee, $scope.noOfBeds, $scope.noOfBaths, $scope.noOfGarages).then(function (response) {
+                $rootScope.pro = response.data;
+            })
+            alert("Property added!. Click 'OK' to add images to the property");
+            window.location.href = "User/AddPictures.html";
         }, function () {
             alert("Property not added. Try again");
-             
-        })
+        })       
     }
+    
 }]);
 
 signupApp.factory('AddProperty', function ($http) {
     AddProperty = {};
-    var urlBase = "http://localhost:15446/Api/"    
+    var urlBase = "http://localhost:15446/api"
 
-    //get request
+    //post request - add property request
     AddProperty.saveProperty = function (PropAdd) {
-        return $http.post(urlBase + 'Property', PropAdd)
-    }
-
-     AddProperty.GetProperty = function (price, m2, address, title, description, suburb, typee, noOfBeds, noOfBaths, noOfGarages) {
-        return $http.get(urlBase + "propId?price=" + price + "&m2=" + m2 + "&address=" + address + "&title=" + title + "&description=" + description + "&suburb=" + suburb + "&typee=" + typee + "&noOfBeds=" + noOfBeds + "&noOfBaths=" + noOfBaths + "&noOfGarages=" + noOfGarages)
+        return $http.post(urlBase + '/Property', PropAdd);
     }
 
     return AddProperty;
-});
+})
+
+signupApp.factory('GetProperty', function ($http) {
+    GetProperty = {};
+    var urlBase = "http://localhost:15446/api/PropertyID"
+
+    //get request - get property request
+    GetProperty.getprop = function (price, m2, address, title, description, suburb, typee, noOfBeds, noOfBaths, noOfGarages) {
+        return $http.get(urlBase + '?price=' + price + '&m2=' + m2 + '&address=' + address + '&title=' + title + '&description=' + description + '&suburb=' + suburb + '&typee=' + typee + '&noOfBeds=' + noOfBeds + '&noOfBaths=' + noOfBaths + '&noOfGarages=' + noOfGarages);
+    }
+    return GetProperty;
+})
 
 signupApp.directive('ngFiles', ['$parse', function ($parse) {
     function fn_link(scope, element, attrs) {
@@ -190,7 +196,7 @@ signupApp.service('uploadFile', ['$http', function ($http) {
 }]);
 
 signupApp.controller('ImageCtrl', ['$scope', '$rootScope', 'uploadFile', function ($scope, $rootScope, uploadFile) {
-    $rootScope.pro.propertyID;
+    $scope.propertyID = $rootScope.pro;
     $scope.uploadFile = function () {
         $scope.myFile = $scope.files[0];
         var file = $scope.myFile;
